@@ -8,16 +8,21 @@ class CustomTextField extends StatelessWidget {
   });
 
    TextEditingController email;
+   GlobalKey<FormState> formState = GlobalKey();
  String text;
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: email,
-      decoration: InputDecoration(
-        hintText: text,
-        hintStyle: TextStyle(fontSize: 20),
-        prefixIcon: Icon(Icons.email,size: 30,),
-
+    return Form(
+      key: formState,
+      child: TextFormField(
+        controller: email,
+        keyboardType: TextInputType.text,
+        decoration: InputDecoration(
+          hintText: text,
+          hintStyle: TextStyle(fontSize: 20),
+          prefixIcon: Icon(Icons.email,size: 30,),
+          
+        ),
       ),
     );
   }
