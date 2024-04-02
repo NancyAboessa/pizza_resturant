@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -30,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
       email: email,
       password: password,
     );
-    
+
     emit(CreateUserSuceess());
   }
 
@@ -42,5 +42,15 @@ class AuthCubit extends Cubit<AuthState> {
 
   ResetPass(email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
+
+  LoginAdmin(usercontroller) {
+    FirebaseFirestore.instance.collection("admin").get().then((Snapshot) {
+      Snapshot.docs.forEach((element) {
+        if(element.data()['id']!=usercontroller){
+          
+        }
+      });
+    });
   }
 }
